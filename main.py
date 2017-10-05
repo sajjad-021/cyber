@@ -23,9 +23,9 @@ import requests as req
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
-TOKEN = '288052779:AAGdQHK3fZ_VOroVfJUngdWQ1bk9XfAWbas'
+TOKEN = '405312603:AAHOZ-2GskE-H-ppbNu0dqojsXer6HdDM_I'
 bot = telebot.TeleBot(TOKEN)
-sudo = '142141024'
+sudo = '180191663'
 rediss = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 #################################################################################################################################################################################################
@@ -58,7 +58,7 @@ def send_pic(m):
 
 @bot.message_handler(commands=['pm'])
 def pm(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         ids = m.text.split()[1]
         text = m.text.split()[2]
         bot.send_message(int(ids), '{}'.format(text),parse_mode='HTML')
@@ -231,7 +231,7 @@ def callback_inline(call):
 
 @bot.message_handler(commands=['stats'])
 def send_stats(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         usrs = str(rediss.scard('memberspy'))
         ban = str(rediss.scard('banlist'))
         text = '*Users : {}\n\nBanlist : {}*'.format(usrs,ban)
@@ -273,7 +273,7 @@ def welcome(m):
 
 @bot.message_handler(commands=['ban'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         ids = m.text.split()[1]
         rediss.sadd('banlist',int(ids))
         bot.send_message(int(ids), '<b>You Are Banned!</b>',parse_mode='HTML')
@@ -283,7 +283,7 @@ def kick(m):
 
 @bot.message_handler(commands=['unban'])
 def send_stats(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         ids = m.text.split()[1]
         rediss.srem('banlist',int(ids))
         bot.send_message(int(ids), '<b>You Are UnBanned!</b>',parse_mode='HTML')
@@ -324,7 +324,7 @@ def hi(m):
     name = m.new_chat_member.first_name
     title = m.chat.title
     ids = m.new_chat_member.id
-    if id == 142141024:
+    if id == 180191663:
         rediss.sadd('chats',ids)
         bot.send_message(m.chat.id, '*Hi!\nPlease Start Me In Pravite*', parse_mode='Markdown')
     else:
@@ -334,7 +334,7 @@ def hi(m):
 
 @bot.message_handler(commands=['clearban'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         rediss.delete('banlist')
         bot.send_message(m.chat.id, '<b>Cleaned!</b>',parse_mode='HTML')
 
@@ -349,7 +349,7 @@ def hi(m):
 
 @bot.message_handler(commands=['kick'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
       if m.reply_to_message:
         text = m.reply_to_message.from_user.id
         bot.kick_chat_member(m.chat.id, text)
@@ -403,7 +403,7 @@ def answer(m):
 
 @bot.message_handler(commands=['leave'])
 def leavehandler(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         bot.leave_chat(m.chat.id)
 
 #################################################################################################################################################################################################
@@ -706,7 +706,7 @@ def feedback(m):
           str = m.text
           txt = str.replace('/feedback', '')
           bot.send_message(senderid, "_Thank Your Msg Posted admin_", parse_mode="Markdown")
-          bot.send_message(142141024, "Message : {}\nID : {}\nName : {}\nUsername : @{}".format(txt,senderid,first,usr))
+          bot.send_message(180191663, "Message : {}\nID : {}\nName : {}\nUsername : @{}".format(txt,senderid,first,usr))
        except:
           bot.send_message(m.chat.id, '*Error!*', parse_mode="Markdown")
 
@@ -714,7 +714,7 @@ def feedback(m):
 
 @bot.message_handler(commands=['uptime'])
 def uptime(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         cc = os.popen("uptime").read()
         bot.send_message(m.chat.id, '{}'.format(cc))
 
@@ -804,7 +804,7 @@ def send_message(m):
     groupname = m.chat.title
     groupid = m.chat.id
     rediss.sadd('group','{}'.format(m.chat.id))
-    bot.send_message(142141024, "New_chat \n\n name : {} ID : {}".format(groupname,groupid), parse_mode="Markdown")
+    bot.send_message(180191663, "New_chat \n\n name : {} ID : {}".format(groupname,groupid), parse_mode="Markdown")
     bot.send_message(m.chat.id, "Hi all")
 
 #################################################################################################################################################################################################
@@ -920,7 +920,7 @@ def clac(m):
 
 @bot.message_handler(commands=['setrank'])
 def clac(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         text = m.text.split()[1]
         tezt = m.text.split()[2]
         rediss.hset("user:rank","{}".format(text),"{}".format(tezt))
@@ -944,7 +944,7 @@ def clac(m):
 
 @bot.message_handler(commands=['bc'])
 def clac(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         text = m.text.replace("/bc ","")
         rd = rediss.smembers('memberspy')
         for id in rd:
@@ -954,7 +954,7 @@ def clac(m):
 
 @bot.message_handler(commands=['delrank'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 180191663:
         id = m.text.replace("/delrank ","")
         rank = rediss.hdel("user:rank","{}".format(id))
         bot.send_message(m.chat.id, '<code>Cleaned!</code>',parse_mode='HTML')
@@ -1105,6 +1105,3 @@ def clac(m):
 #################################################################################################################################################################################################
 bot.polling(True)
 #end
-
-
-
